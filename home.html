@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITM Gwalior – Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1F3A; --navy-mid: #122849; --navy-light: #1A3560;
+    --gold: #D4A843; --gold-light: #F0C96A; --gold-dim: #9A7730;
+    --cream: #F8F4EE; --white: #FFFFFF;
+    --text-muted: #8A9BBD; --text-dim: #C4CEDF;
+    --border: rgba(212,168,67,0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(11,31,58,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-box {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--gold), #C4922E);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Sora', sans-serif; font-weight: 800; font-size: 12px; color: var(--navy);
+  }
+  .nav-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 15px; color: var(--white); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500;
+    transition: color 0.15s; letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    padding: 9px 20px; background: linear-gradient(135deg, var(--gold), #C4922E);
+    border-radius: 10px; font-family: 'Sora', sans-serif; font-weight: 600;
+    font-size: 13px; color: var(--navy); text-decoration: none;
+    transition: all 0.15s; box-shadow: 0 4px 14px rgba(212,168,67,0.25);
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212,168,67,0.4); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 30%, rgba(212,168,67,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(26,53,96,0.8) 0%, transparent 50%);
+  }
+  /* Diagonal gold accent line */
+  .hero-line {
+    position: absolute;
+    top: 0; right: 15%;
+    width: 1px; height: 60%;
+    background: linear-gradient(180deg, transparent, rgba(212,168,67,0.25), transparent);
+    transform: rotate(15deg);
+    transform-origin: top center;
+  }
+
+  .hero-content { max-width: 680px; position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 30px; padding: 6px 16px;
+    font-size: 12px; color: var(--gold); letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 600; margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  .hero-title {
+    font-family: 'Sora', sans-serif; font-size: clamp(40px, 6vw, 68px);
+    font-weight: 800; line-height: 1.08; letter-spacing: -0.03em;
+    color: var(--white); margin-bottom: 20px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-title .gold { color: var(--gold); }
+  .hero-title .outline {
+    -webkit-text-stroke: 1.5px rgba(212,168,67,0.5);
+    color: transparent;
+  }
+  .hero-desc {
+    font-size: 17px; color: var(--text-muted); line-height: 1.75;
+    max-width: 520px; margin-bottom: 36px;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+  .hero-actions {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .btn-primary {
+    padding: 15px 28px; background: linear-gradient(135deg, var(--gold), #C4922E);
+    border-radius: 13px; font-family: 'Sora', sans-serif; font-size: 15px;
+    font-weight: 700; color: var(--navy); text-decoration: none;
+    box-shadow: 0 8px 24px rgba(212,168,67,0.3); transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,168,67,0.45); }
+  .btn-secondary {
+    padding: 15px 28px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 13px; font-family: 'Sora', sans-serif; font-size: 15px;
+    font-weight: 600; color: var(--text-dim); text-decoration: none;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { border-color: rgba(212,168,67,0.35); color: var(--gold); background: rgba(212,168,67,0.05); }
+
+  /* Stats strip */
+  .stats-strip {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    margin-top: 52px; padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    animation: fadeUp 0.8s ease 0.55s both;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 3px; }
+  .stat-num { font-family: 'Sora', sans-serif; font-size: 28px; font-weight: 800; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; }
+
+  /* Floating chat preview card */
+  .hero-card {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    width: 320px;
+    background: rgba(18,40,73,0.9);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    z-index: 2;
+    animation: fadeUp 0.9s ease 0.5s both;
+    display: none;
+  }
+  @media (min-width: 1100px) { .hero-card { display: block; } }
+  .hc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .hc-avatar { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--gold), #C4922E); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .hc-name { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; }
+  .hc-status { font-size: 11px; color: #4ADE80; }
+  .hc-msg { display: flex; gap: 8px; margin-bottom: 10px; align-items: flex-start; }
+  .hc-bubble { padding: 10px 13px; border-radius: 12px; font-size: 12px; line-height: 1.5; color: var(--text-dim); border-bottom-left-radius: 3px; }
+  .hc-bubble.bot { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); }
+  .hc-bubble.user { background: linear-gradient(135deg, var(--gold), #C4922E); color: var(--navy); font-weight: 500; border-bottom-right-radius: 3px; border-bottom-left-radius: 12px; margin-left: auto; }
+  .hc-msg.user { flex-direction: row-reverse; }
+
+  /* FEATURES */
+  .section { padding: 96px 48px; }
+  .section-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--gold); font-weight: 600; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif; font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800; color: var(--white); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .section-title span { color: var(--gold); }
+  .section-sub { font-size: 16px; color: var(--text-muted); line-height: 1.7; max-width: 520px; margin-bottom: 56px; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .feature-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 18px; padding: 28px;
+    transition: all 0.2s ease;
+  }
+  .feature-card:hover { border-color: rgba(212,168,67,0.35); background: rgba(212,168,67,0.04); transform: translateY(-3px); }
+  .fc-icon {
+    width: 48px; height: 48px; border-radius: 13px;
+    background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 18px;
+  }
+  .fc-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .fc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+  /* Topics section */
+  .topics-section { background: var(--navy-mid); padding: 80px 48px; }
+  .topics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 40px; }
+  .topic-pill {
+    padding: 14px 18px; border-radius: 12px;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    font-size: 13px; color: var(--text-dim); cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.18s; text-decoration: none;
+  }
+  .topic-pill:hover { background: rgba(212,168,67,0.08); border-color: rgba(212,168,67,0.3); color: var(--gold-light); transform: translateY(-2px); }
+  .topic-pill span { font-size: 18px; }
+
+  /* CTA section */
+  .cta-section {
+    padding: 100px 48px; text-align: center;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(212,168,67,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-title { font-family: 'Sora', sans-serif; font-size: clamp(28px, 5vw, 48px); font-weight: 800; color: var(--white); margin-bottom: 16px; letter-spacing: -0.02em; }
+  .cta-title span { color: var(--gold); }
+  .cta-sub { font-size: 16px; color: var(--text-muted); margin-bottom: 36px; }
+
+  /* Footer */
+  footer {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    padding: 36px 48px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 10px; }
+  .footer-logo-box { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--gold), #C4922E); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 10px; color: var(--navy); }
+  .footer-name { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 12px; color: rgba(138,155,189,0.4); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .section, .topics-section, .cta-section { padding: 60px 20px; }
+    footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="home.html">
+    <div class="nav-logo-box">ITM</div>
+    <span class="nav-name">ITM Gwalior</span>
+  </a>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="chat.html">Chat</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+  </div>
+  <a class="nav-cta" href="chat.html">Start Chatting 🤖</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">✨ AI-Powered College Assistant</div>
+    <h1 class="hero-title">
+      Your Smart<br>
+      <span class="gold">ITM Gwalior</span><br>
+      <span class="outline">Assistant</span>
+    </h1>
+    <p class="hero-desc">
+      Get instant answers about admissions, fees, hostel, placements, and everything about ITM Gwalior — available 24/7 in English and Hinglish.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="chat.html">🤖 Chat Now</a>
+      <a class="btn-secondary" href="about.html">Learn More →</a>
+    </div>
+    <div class="stats-strip">
+      <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Questions answered daily</span></div>
+      <div class="stat-item"><span class="stat-num">24/7</span><span class="stat-label">Always available</span></div>
+      <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Languages supported</span></div>
+      <div class="stat-item"><span class="stat-num">98%</span><span class="stat-label">Accuracy rate</span></div>
+    </div>
+  </div>
+
+  <!-- Floating chat card preview -->
+  <div class="hero-card">
+    <div class="hc-header">
+      <div class="hc-avatar">🎓</div>
+      <div>
+        <div class="hc-name">ITM Assistant</div>
+        <div class="hc-status">● Online</div>
+      </div>
+    </div>
+    <div class="hc-msg">
+      <div class="hc-bubble bot">Namaste! 🙏 ITM Gwalior ke baare mein kuch bhi poochho. Main 24/7 available hoon!</div>
+    </div>
+    <div class="hc-msg user">
+      <div class="hc-bubble user">What is the fee for BTech CSE?</div>
+    </div>
+    <div class="hc-msg">
+      <div class="hc-bubble bot">BTech CSE ki fees approximately ₹85,000–₹1,20,000 per year hai. Scholarship bhi available hai! 🎓</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section">
+  <div class="section-label">Why use our assistant</div>
+  <h2 class="section-title">Everything you need to<br><span>know about ITM</span></h2>
+  <p class="section-sub">Instant, accurate answers about the college — no waiting, no phone calls, no confusion.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="fc-icon">⚡</div>
+      <div class="fc-title">Instant Answers</div>
+      <div class="fc-desc">Get responses in seconds — no waiting in queues or calling the office during busy hours.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🌐</div>
+      <div class="fc-title">English & Hinglish</div>
+      <div class="fc-desc">Talk in the language you're most comfortable with. Switch anytime you want.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🎯</div>
+      <div class="fc-title">Accurate Info</div>
+      <div class="fc-desc">All answers are sourced from official ITM data — fees, admissions, placements, and more.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🕐</div>
+      <div class="fc-title">Available 24/7</div>
+      <div class="fc-desc">Ask questions at midnight, during weekends, or during holidays. Always available.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🔒</div>
+      <div class="fc-title">Private & Secure</div>
+      <div class="fc-desc">Your queries are not stored or shared. Complete privacy for every conversation.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">📱</div>
+      <div class="fc-title">Works on Any Device</div>
+      <div class="fc-desc">Fully responsive — works perfectly on mobile, tablet, and desktop.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Topics -->
+<section class="topics-section">
+  <div class="section-label">What can I ask?</div>
+  <h2 class="section-title">Ask about <span>anything</span></h2>
+  <div class="topics-grid">
+    <a class="topic-pill" href="chat.html"><span>🎓</span> Admissions</a>
+    <a class="topic-pill" href="chat.html"><span>💰</span> Fee Structure</a>
+    <a class="topic-pill" href="chat.html"><span>🏠</span> Hostel Facilities</a>
+    <a class="topic-pill" href="chat.html"><span>💼</span> Placements</a>
+    <a class="topic-pill" href="chat.html"><span>📚</span> Courses & Branches</a>
+    <a class="topic-pill" href="chat.html"><span>🏆</span> Scholarships</a>
+    <a class="topic-pill" href="chat.html"><span>📅</span> Academic Calendar</a>
+    <a class="topic-pill" href="chat.html"><span>⚽</span> Sports & Activities</a>
+    <a class="topic-pill" href="chat.html"><span>🔬</span> Labs & Infrastructure</a>
+    <a class="topic-pill" href="chat.html"><span>👨‍🏫</span> Faculty Info</a>
+    <a class="topic-pill" href="chat.html"><span>📞</span> Contact & Location</a>
+    <a class="topic-pill" href="chat.html"><span>🚌</span> Transport & Bus</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="cta-title">Ready to get your<br><span>questions answered?</span></h2>
+  <p class="cta-sub">Start chatting with ITM's smart assistant right now — it's free and instant.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a class="btn-primary" href="chat.html">🤖 Start Chatting</a>
+    <a class="btn-secondary" href="contact.html">📞 Contact College</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <div class="footer-logo-box">ITM</div>
+    <span class="footer-name">ITM Gwalior Assistant</span>
+  </div>
+  <div class="footer-links">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="chat.html">Chat</a>
+    <a href="contact.html">Contact</a>
+    <a href="admin.html">Admin</a>
+  </div>
+  <span class="footer-copy">© 2025 ITM University, Gwalior</span>
+</footer>
+
+</body>
+</html>

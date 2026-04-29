@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITM Gwalior – Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1F3A; --navy-mid: #122849; --navy-light: #1A3560;
+    --gold: #D4A843; --gold-light: #F0C96A;
+    --white: #FFFFFF; --text-muted: #8A9BBD; --text-dim: #C4CEDF;
+    --border: rgba(212,168,67,0.15); --input-bg: rgba(255,255,255,0.04);
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy); color: var(--white);
+    min-height: 100vh; display: flex; overflow: hidden;
+  }
+
+  /* Left decorative panel */
+  .left-panel {
+    width: 45%; background: var(--navy-mid);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 56px; position: relative; overflow: hidden;
+  }
+  .left-panel::before {
+    content: '';
+    position: absolute; bottom: -100px; left: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,168,67,0.1) 0%, transparent 70%);
+  }
+  .left-panel::after {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 260px; height: 260px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,53,96,0.9) 0%, transparent 70%);
+  }
+  .lp-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 56px; position: relative; z-index: 2; }
+  .lp-logo-box {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold), #C4922E);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Sora', sans-serif; font-weight: 800; font-size: 14px; color: var(--navy);
+    box-shadow: 0 4px 16px rgba(212,168,67,0.3);
+  }
+  .lp-brand { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 17px; }
+  .lp-title {
+    font-family: 'Sora', sans-serif; font-size: 36px; font-weight: 800;
+    line-height: 1.12; letter-spacing: -0.02em; color: var(--white);
+    margin-bottom: 18px; position: relative; z-index: 2;
+  }
+  .lp-title span { color: var(--gold); }
+  .lp-desc { font-size: 15px; color: var(--text-muted); line-height: 1.7; max-width: 340px; position: relative; z-index: 2; margin-bottom: 48px; }
+
+  .lp-features { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 18px; }
+  .lp-feat { display: flex; align-items: flex-start; gap: 14px; }
+  .lp-feat-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+  }
+  .lp-feat-text { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .lp-feat-text strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* Right form panel */
+  .right-panel {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 40px 32px; overflow-y: auto;
+  }
+  .form-box { width: 100%; max-width: 400px; animation: fadeUp 0.6s ease both; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Tabs */
+  .tabs { display: flex; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-bottom: 32px; }
+  .tab-btn {
+    flex: 1; padding: 10px; border: none; background: transparent;
+    font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 600;
+    color: var(--text-muted); cursor: pointer; border-radius: 9px; transition: all 0.2s;
+  }
+  .tab-btn.active { background: linear-gradient(135deg, var(--gold), #C4922E); color: var(--navy); }
+
+  .form-title { font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+  .form-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+
+  /* Form fields */
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+  .field-wrap { position: relative; }
+  .field-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5; pointer-events: none; }
+  .field input, .field select {
+    width: 100%; padding: 13px 14px 13px 42px;
+    background: var(--input-bg); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 11px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: var(--white); outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field input::placeholder { color: rgba(138,155,189,0.4); }
+  .field input:focus, .field select:focus {
+    border-color: rgba(212,168,67,0.5);
+    box-shadow: 0 0 0 3px rgba(212,168,67,0.08);
+  }
+  .field select { -webkit-appearance: none; color: var(--text-muted); }
+  .field select option { background: var(--navy-mid); }
+
+  /* Password toggle */
+  .pass-toggle {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    cursor: pointer; font-size: 16px; opacity: 0.4; transition: opacity 0.2s;
+    background: none; border: none; color: var(--white);
+  }
+  .pass-toggle:hover { opacity: 0.8; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .forgot-link { display: block; text-align: right; font-size: 12px; color: var(--gold); text-decoration: none; margin-top: -10px; margin-bottom: 20px; }
+  .forgot-link:hover { text-decoration: underline; }
+
+  .submit-btn {
+    width: 100%; padding: 15px;
+    background: linear-gradient(135deg, var(--gold), #C4922E);
+    border: none; border-radius: 12px;
+    font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700;
+    color: var(--navy); cursor: pointer;
+    box-shadow: 0 8px 24px rgba(212,168,67,0.3);
+    transition: all 0.2s; margin-bottom: 20px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,168,67,0.45); }
+  .submit-btn:active { transform: translateY(0); }
+
+  .divider { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+  .divider-text { font-size: 12px; color: var(--text-muted); }
+
+  .guest-btn {
+    width: 100%; padding: 13px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    font-weight: 500; color: var(--text-dim); cursor: pointer; transition: all 0.2s;
+    text-decoration: none; display: block; text-align: center;
+  }
+  .guest-btn:hover { border-color: rgba(212,168,67,0.3); color: var(--gold); background: rgba(212,168,67,0.04); }
+
+  .back-home { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); text-decoration: none; margin-top: 24px; transition: color 0.15s; }
+  .back-home:hover { color: var(--gold); }
+
+  .panel-hidden { display: none; }
+
+  @media (max-width: 768px) {
+    .left-panel { display: none; }
+    .right-panel { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="left-panel">
+  <div class="lp-logo">
+    <div class="lp-logo-box">ITM</div>
+    <span class="lp-brand">ITM Gwalior</span>
+  </div>
+  <h2 class="lp-title">Your campus,<br>now <span>smarter</span></h2>
+  <p class="lp-desc">Login to get personalized answers, track your enquiries, and access all ITM information instantly.</p>
+  <div class="lp-features">
+    <div class="lp-feat">
+      <div class="lp-feat-icon">🎓</div>
+      <div class="lp-feat-text"><strong>Personalized Experience</strong>Save your preferred language & chat history</div>
+    </div>
+    <div class="lp-feat">
+      <div class="lp-feat-icon">🔔</div>
+      <div class="lp-feat-text"><strong>Get Notifications</strong>Stay updated on admission deadlines & events</div>
+    </div>
+    <div class="lp-feat">
+      <div class="lp-feat-icon">💬</div>
+      <div class="lp-feat-text"><strong>Chat History</strong>Access your past conversations anytime</div>
+    </div>
+  </div>
+</div>
+
+<div class="right-panel">
+  <div class="form-box">
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-login" onclick="showTab('login')">Login</button>
+      <button class="tab-btn" id="tab-signup" onclick="showTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="panel-login">
+      <h2 class="form-title">Welcome back 👋</h2>
+      <p class="form-subtitle">Enter your credentials to continue</p>
+
+      <div class="field">
+        <label>Email or Enrollment No.</label>
+        <div class="field-wrap">
+          <span class="field-icon">📧</span>
+          <input type="text" placeholder="your@email.com or 2023ITM001">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <div class="field-wrap">
+          <span class="field-icon">🔒</span>
+          <input type="password" id="login-pass" placeholder="Enter your password">
+          <button class="pass-toggle" onclick="togglePass('login-pass', this)">👁</button>
+        </div>
+      </div>
+
+      <a href="#" class="forgot-link">Forgot password?</a>
+
+      <button class="submit-btn" onclick="window.location.href='chat.html'">Login to ITM Assistant</button>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">or</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <a class="guest-btn" href="chat.html">Continue as Guest 👤</a>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div id="panel-signup" class="panel-hidden">
+      <h2 class="form-title">Create account 🎓</h2>
+      <p class="form-subtitle">Join ITM Gwalior's smart assistant</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label>First Name</label>
+          <div class="field-wrap">
+            <span class="field-icon">👤</span>
+            <input type="text" placeholder="Rahul">
+          </div>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <div class="field-wrap">
+            <span class="field-icon">👤</span>
+            <input type="text" placeholder="Sharma">
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email Address</label>
+        <div class="field-wrap">
+          <span class="field-icon">📧</span>
+          <input type="email" placeholder="your@email.com">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>I am a…</label>
+        <div class="field-wrap">
+          <span class="field-icon">🎓</span>
+          <select>
+            <option value="">Select your role</option>
+            <option>Prospective Student</option>
+            <option>Current Student</option>
+            <option>Parent / Guardian</option>
+            <option>Alumni</option>
+            <option>Faculty / Staff</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <div class="field-wrap">
+          <span class="field-icon">🔒</span>
+          <input type="password" id="signup-pass" placeholder="Min. 8 characters">
+          <button class="pass-toggle" onclick="togglePass('signup-pass', this)">👁</button>
+        </div>
+      </div>
+
+      <button class="submit-btn" onclick="window.location.href='chat.html'">Create Account & Chat</button>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">or</span>
+        <div class="divider-line"></div>
+      </div>
+      <a class="guest-btn" href="chat.html">Continue as Guest 👤</a>
+    </div>
+
+    <a class="back-home" href="home.html">← Back to Home</a>
+  </div>
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-login').classList.toggle('panel-hidden', tab !== 'login');
+  document.getElementById('panel-signup').classList.toggle('panel-hidden', tab !== 'signup');
+}
+
+function togglePass(id, btn) {
+  const el = document.getElementById(id);
+  if (el.type === 'password') { el.type = 'text'; btn.textContent = '🙈'; }
+  else { el.type = 'password'; btn.textContent = '👁'; }
+}
+</script>
+</body>
+</html>

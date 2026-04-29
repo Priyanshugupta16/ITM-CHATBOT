@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITM Gwalior – About</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#0B1F3A; --navy-mid:#122849; --navy-light:#1A3560;
+    --gold:#D4A843; --gold-light:#F0C96A;
+    --white:#FFFFFF; --text-muted:#8A9BBD; --text-dim:#C4CEDF;
+    --border:rgba(212,168,67,0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--navy); color:var(--white); overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:16px 48px; display:flex; align-items:center; justify-content:space-between;
+    background:rgba(11,31,58,0.85); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .nav-logo-box { width:36px; height:36px; border-radius:9px; background:linear-gradient(135deg,var(--gold),#C4922E); display:flex; align-items:center; justify-content:center; font-family:'Sora',sans-serif; font-weight:800; font-size:12px; color:var(--navy); }
+  .nav-name { font-family:'Sora',sans-serif; font-weight:700; font-size:15px; }
+  .nav-links { display:flex; gap:32px; align-items:center; }
+  .nav-links a { font-size:13px; color:var(--text-muted); text-decoration:none; font-weight:500; transition:color 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .nav-cta { padding:9px 20px; background:linear-gradient(135deg,var(--gold),#C4922E); border-radius:10px; font-family:'Sora',sans-serif; font-weight:600; font-size:13px; color:var(--navy); text-decoration:none; transition:all 0.15s; }
+  .nav-cta:hover { transform:translateY(-1px); }
+
+  /* Page Header */
+  .page-header {
+    padding: 130px 48px 80px;
+    text-align: center;
+    position: relative;
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .page-header::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 50% 80% at 50% 100%, rgba(212,168,67,0.07) 0%, transparent 60%);
+  }
+  .page-header-label { font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:var(--gold); font-weight:600; margin-bottom:12px; }
+  .page-header-title { font-family:'Sora',sans-serif; font-size:clamp(32px,5vw,54px); font-weight:800; color:var(--white); margin-bottom:16px; letter-spacing:-0.02em; }
+  .page-header-title span { color:var(--gold); }
+  .page-header-desc { font-size:16px; color:var(--text-muted); line-height:1.7; max-width:540px; margin:0 auto; }
+
+  .section { padding:80px 48px; max-width:1100px; margin:0 auto; }
+
+  /* About intro */
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .about-text-label { font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:var(--gold); font-weight:600; margin-bottom:12px; }
+  .about-text-title { font-family:'Sora',sans-serif; font-size:clamp(24px,3.5vw,36px); font-weight:800; color:var(--white); line-height:1.15; letter-spacing:-0.02em; margin-bottom:18px; }
+  .about-text-title span { color:var(--gold); }
+  .about-text-body { font-size:15px; color:var(--text-muted); line-height:1.8; margin-bottom:16px; }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+  .astat { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:14px; padding:20px; }
+  .astat-num { font-family:'Sora',sans-serif; font-size:28px; font-weight:800; color:var(--gold); }
+  .astat-label { font-size:12px; color:var(--text-muted); margin-top:4px; }
+
+  /* Visual side panel */
+  .about-visual {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-visual::before {
+    content:'';
+    position:absolute; top:-40px; right:-40px;
+    width:180px; height:180px; border-radius:50%;
+    background: radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 70%);
+  }
+  .av-title { font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:var(--gold); margin-bottom:20px; text-transform:uppercase; letter-spacing:0.08em; }
+  .av-item { display:flex; align-items:flex-start; gap:14px; margin-bottom:20px; }
+  .av-icon { font-size:22px; width:40px; flex-shrink:0; }
+  .av-text strong { font-size:14px; font-weight:600; color:var(--white); display:block; margin-bottom:3px; }
+  .av-text span { font-size:12px; color:var(--text-muted); }
+
+  /* Departments */
+  .section-full { padding:80px 0; background:var(--navy-mid); }
+  .section-inner { max-width:1100px; margin:0 auto; padding:0 48px; }
+  .sec-label { font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:var(--gold); font-weight:600; margin-bottom:12px; }
+  .sec-title { font-family:'Sora',sans-serif; font-size:clamp(24px,3.5vw,36px); font-weight:800; color:var(--white); letter-spacing:-0.02em; margin-bottom:8px; }
+  .sec-title span { color:var(--gold); }
+  .sec-sub { font-size:15px; color:var(--text-muted); margin-bottom:40px; }
+
+  .dept-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px; }
+  .dept-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:16px; padding:24px 20px; transition:all 0.2s; }
+  .dept-card:hover { border-color:rgba(212,168,67,0.4); background:rgba(212,168,67,0.04); transform:translateY(-3px); }
+  .dept-icon { font-size:28px; margin-bottom:14px; }
+  .dept-name { font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:var(--white); margin-bottom:6px; }
+  .dept-detail { font-size:12px; color:var(--text-muted); line-height:1.5; }
+
+  /* Faculty */
+  .faculty-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:20px; }
+  .faculty-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:16px; padding:24px 20px; text-align:center; transition:all 0.2s; }
+  .faculty-card:hover { border-color:rgba(212,168,67,0.3); transform:translateY(-3px); }
+  .faculty-avatar { width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#C4922E); display:flex; align-items:center; justify-content:center; font-family:'Sora',sans-serif; font-size:22px; font-weight:700; color:var(--navy); margin:0 auto 14px; }
+  .faculty-name { font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:var(--white); margin-bottom:4px; }
+  .faculty-role { font-size:12px; color:var(--gold); margin-bottom:4px; }
+  .faculty-dept { font-size:11px; color:var(--text-muted); }
+
+  /* Timeline */
+  .timeline { position:relative; padding-left:32px; }
+  .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(180deg, var(--gold), transparent); }
+  .tl-item { position:relative; margin-bottom:32px; }
+  .tl-dot { position:absolute; left:-38px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--gold); border:3px solid var(--navy); }
+  .tl-year { font-family:'Sora',sans-serif; font-size:12px; font-weight:700; color:var(--gold); margin-bottom:4px; }
+  .tl-title { font-size:15px; font-weight:600; color:var(--white); margin-bottom:4px; }
+  .tl-desc { font-size:13px; color:var(--text-muted); line-height:1.6; }
+
+  /* CTA */
+  .bottom-cta { text-align:center; padding:80px 48px; }
+  .bc-title { font-family:'Sora',sans-serif; font-size:clamp(24px,4vw,40px); font-weight:800; color:var(--white); margin-bottom:14px; letter-spacing:-0.02em; }
+  .bc-title span { color:var(--gold); }
+  .bc-sub { font-size:15px; color:var(--text-muted); margin-bottom:32px; }
+  .btn-primary { padding:14px 28px; background:linear-gradient(135deg,var(--gold),#C4922E); border-radius:13px; font-family:'Sora',sans-serif; font-size:15px; font-weight:700; color:var(--navy); text-decoration:none; box-shadow:0 8px 24px rgba(212,168,67,0.3); transition:all 0.2s; display:inline-flex; align-items:center; gap:8px; margin:0 8px; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(212,168,67,0.45); }
+  .btn-secondary { padding:14px 28px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); border-radius:13px; font-family:'Sora',sans-serif; font-size:15px; font-weight:600; color:var(--text-dim); text-decoration:none; transition:all 0.2s; display:inline-flex; align-items:center; gap:8px; margin:0 8px; }
+  .btn-secondary:hover { border-color:rgba(212,168,67,0.35); color:var(--gold); }
+
+  footer { background:var(--navy-mid); border-top:1px solid var(--border); padding:32px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .footer-copy { font-size:12px; color:rgba(138,155,189,0.4); }
+  .footer-links { display:flex; gap:24px; }
+  .footer-links a { font-size:13px; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+  .footer-links a:hover { color:var(--gold); }
+
+  @media (max-width:900px) { .about-grid { grid-template-columns:1fr; } }
+  @media (max-width:768px) {
+    nav { padding:14px 20px; } .nav-links { display:none; }
+    .section, .section-inner, .bottom-cta { padding-left:20px; padding-right:20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="home.html">
+    <div class="nav-logo-box">ITM</div>
+    <span class="nav-name">ITM Gwalior</span>
+  </a>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="chat.html">Chat</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+  </div>
+  <a class="nav-cta" href="chat.html">Start Chatting 🤖</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-label">About the College</div>
+  <h1 class="page-header-title">ITM University <span>Gwalior</span></h1>
+  <p class="page-header-desc">A premier technical institution shaping engineers, managers, and innovators since 1997.</p>
+</div>
+
+<!-- About section -->
+<section class="section">
+  <div class="about-grid">
+    <div>
+      <div class="about-text-label">Who we are</div>
+      <h2 class="about-text-title">Excellence in<br><span>Technical Education</span></h2>
+      <p class="about-text-body">ITM University, Gwalior is one of Madhya Pradesh's leading private universities, offering world-class education in Engineering, Management, Computer Science, and more. With a sprawling campus and modern infrastructure, ITM has been grooming professionals for over 25 years.</p>
+      <p class="about-text-body">Affiliated with RGPV and approved by AICTE, ITM maintains high academic standards with experienced faculty, research-focused labs, and strong industry connections for placements.</p>
+      <div class="about-stats">
+        <div class="astat"><div class="astat-num">25+</div><div class="astat-label">Years of excellence</div></div>
+        <div class="astat"><div class="astat-num">10,000+</div><div class="astat-label">Alumni worldwide</div></div>
+        <div class="astat"><div class="astat-num">300+</div><div class="astat-label">Expert faculty</div></div>
+        <div class="astat"><div class="astat-num">200+</div><div class="astat-label">Placement companies</div></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="av-title">🏛 Campus Highlights</div>
+      <div class="av-item"><div class="av-icon">📍</div><div class="av-text"><strong>Location</strong><span>NH-75, Turari, Gwalior, Madhya Pradesh 474001</span></div></div>
+      <div class="av-item"><div class="av-icon">🏗</div><div class="av-text"><strong>Campus Area</strong><span>30+ acres, fully residential campus</span></div></div>
+      <div class="av-item"><div class="av-icon">📜</div><div class="av-text"><strong>Affiliations</strong><span>RGPV affiliated · AICTE approved · UGC recognized</span></div></div>
+      <div class="av-item"><div class="av-icon">🔬</div><div class="av-text"><strong>Labs & Infrastructure</strong><span>50+ advanced labs, smart classrooms, Wi-Fi campus</span></div></div>
+      <div class="av-item"><div class="av-icon">⚽</div><div class="av-text"><strong>Sports Facilities</strong><span>Cricket, football, basketball, gym & indoor sports</span></div></div>
+      <div class="av-item"><div class="av-icon">🍽</div><div class="av-text"><strong>Mess & Canteen</strong><span>Hygienic multi-cuisine food, veg & non-veg</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Departments -->
+<div class="section-full">
+  <div class="section-inner">
+    <div class="sec-label">Academics</div>
+    <h2 class="sec-title">Departments & <span>Programs</span></h2>
+    <p class="sec-sub">Choose from a wide range of undergraduate and postgraduate programs.</p>
+    <div class="dept-grid">
+      <div class="dept-card"><div class="dept-icon">💻</div><div class="dept-name">Computer Science</div><div class="dept-detail">BTech CSE, MCA, BCA — AI, ML, Cybersecurity tracks</div></div>
+      <div class="dept-card"><div class="dept-icon">⚡</div><div class="dept-name">Electronics & Comm.</div><div class="dept-detail">BTech ECE — VLSI, Embedded Systems, IoT</div></div>
+      <div class="dept-card"><div class="dept-icon">⚙️</div><div class="dept-name">Mechanical Engg.</div><div class="dept-detail">BTech ME — CAD/CAM, Robotics, Manufacturing</div></div>
+      <div class="dept-card"><div class="dept-icon">🏗</div><div class="dept-name">Civil Engineering</div><div class="dept-detail">BTech Civil — Structural, Environmental, Urban Infra</div></div>
+      <div class="dept-card"><div class="dept-icon">💡</div><div class="dept-name">Electrical Engg.</div><div class="dept-detail">BTech EE — Power Systems, Control, Renewable Energy</div></div>
+      <div class="dept-card"><div class="dept-icon">📊</div><div class="dept-name">Management (MBA)</div><div class="dept-detail">MBA — Marketing, Finance, HR, Operations, IT</div></div>
+      <div class="dept-card"><div class="dept-icon">🔬</div><div class="dept-name">Applied Sciences</div><div class="dept-detail">BSc, MSc — Physics, Chemistry, Mathematics</div></div>
+      <div class="dept-card"><div class="dept-icon">📱</div><div class="dept-name">IT & Innovation</div><div class="dept-detail">BTech IT — Cloud, DevOps, Full-stack Development</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Faculty -->
+<section class="section">
+  <div class="sec-label">Our People</div>
+  <h2 class="sec-title">Experienced <span>Faculty</span></h2>
+  <p class="sec-sub">300+ qualified professors with industry & research experience</p>
+  <div class="faculty-grid">
+    <div class="faculty-card"><div class="faculty-avatar">DS</div><div class="faculty-name">Dr. D.K. Sharma</div><div class="faculty-role">Vice Chancellor</div><div class="faculty-dept">University Administration</div></div>
+    <div class="faculty-card"><div class="faculty-avatar">AM</div><div class="faculty-name">Dr. A. Mishra</div><div class="faculty-role">Dean, Engineering</div><div class="faculty-dept">Computer Science Dept.</div></div>
+    <div class="faculty-card"><div class="faculty-avatar">PG</div><div class="faculty-name">Prof. P. Gupta</div><div class="faculty-role">HOD, ECE</div><div class="faculty-dept">Electronics & Comm.</div></div>
+    <div class="faculty-card"><div class="faculty-avatar">SK</div><div class="faculty-name">Dr. S. Kumar</div><div class="faculty-role">HOD, Mechanical</div><div class="faculty-dept">Mechanical Engg.</div></div>
+  </div>
+</section>
+
+<!-- History Timeline -->
+<div class="section-full">
+  <div class="section-inner">
+    <div class="sec-label">Our Journey</div>
+    <h2 class="sec-title">College <span>History</span></h2>
+    <p class="sec-sub" style="margin-bottom:40px">25+ years of building careers and changing lives</p>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1997</div><div class="tl-title">Established ITM College</div><div class="tl-desc">Founded with BTech programs in Engineering under RGPV affiliation in Gwalior, MP.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2005</div><div class="tl-title">Management School Launched</div><div class="tl-desc">MBA program introduced with specializations in Marketing, Finance, and HR.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2012</div><div class="tl-title">University Status Granted</div><div class="tl-desc">Elevated to ITM University by Government of Madhya Pradesh. New campus expanded.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2018</div><div class="tl-title">Research & Innovation Centre</div><div class="tl-desc">Launched R&D labs for AI, IoT, and Robotics. Industry tie-ups with TCS, Infosys, and more.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2025</div><div class="tl-title">AI-Powered Smart Assistant</div><div class="tl-desc">Launched ITM's first AI chatbot assistant to help students get instant answers 24/7.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="bottom-cta">
+  <h2 class="bc-title">Want to know more<br>about <span>ITM?</span></h2>
+  <p class="bc-sub">Ask our AI assistant anything — admissions, courses, placements, campus life.</p>
+  <a class="btn-primary" href="chat.html">🤖 Ask the Assistant</a>
+  <a class="btn-secondary" href="contact.html">📞 Contact Directly</a>
+</section>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--gold),#C4922E);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:10px;color:var(--navy);">ITM</div>
+    <span style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;">ITM Gwalior Assistant</span>
+  </div>
+  <div class="footer-links">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="chat.html">Chat</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <span class="footer-copy">© 2025 ITM University, Gwalior</span>
+</footer>
+
+</body>
+</html>

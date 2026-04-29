@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITM Gwalior – Choose Language</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1F3A;
+    --navy-mid: #122849;
+    --navy-light: #1A3560;
+    --gold: #D4A843;
+    --gold-light: #F0C96A;
+    --white: #FFFFFF;
+    --text-muted: #8A9BBD;
+    --text-dim: #C4CEDF;
+    --border: rgba(212,168,67,0.15);
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Background grid pattern */
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(212,168,67,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,168,67,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, var(--navy) 100%);
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 560px;
+    padding: 32px 24px;
+    text-align: center;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Top badge */
+  .top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212,168,67,0.08);
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 30px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+
+  .page-emoji { font-size: 52px; margin-bottom: 20px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  .page-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .page-title span { color: var(--gold); }
+
+  .page-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Language cards */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .lang-card {
+    background: rgba(255,255,255,0.03);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 20px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+  }
+  .lang-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,168,67,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .lang-card:hover {
+    border-color: rgba(212,168,67,0.5);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(212,168,67,0.12);
+  }
+  .lang-card:hover::before { opacity: 1; }
+  .lang-card.selected {
+    border-color: var(--gold);
+    background: rgba(212,168,67,0.08);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(212,168,67,0.2);
+  }
+  .lang-card.selected::before { opacity: 1; }
+
+  .lang-flag { font-size: 36px; margin-bottom: 14px; display: block; }
+  .lang-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .lang-native {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-family: 'Sora', sans-serif;
+  }
+  .lang-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .selected-check {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 24px; height: 24px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    color: var(--navy);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .lang-card.selected .selected-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Continue button */
+  .continue-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--gold) 0%, #C4922E 100%);
+    border: none;
+    border-radius: 14px;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 24px rgba(212,168,67,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .continue-btn.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .continue-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(212,168,67,0.45);
+  }
+  .continue-btn.active:active { transform: translateY(0); }
+
+  .lang-hint { font-size: 12px; color: rgba(138,155,189,0.5); margin-top: 16px; }
+
+  /* Page fade-out */
+  body.fade-out { animation: fadeOut 0.5s ease forwards; }
+  @keyframes fadeOut { to { opacity: 0; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="top-badge">🌐 Language Preference</div>
+
+  <span class="page-emoji">💬</span>
+
+  <h1 class="page-title">How would you like<br>to <span>continue?</span></h1>
+  <p class="page-desc">Choose your preferred language. You can change this anytime from settings.</p>
+
+  <div class="lang-grid">
+    <!-- English -->
+    <div class="lang-card" id="card-en" onclick="selectLang('en')">
+      <div class="selected-check">✓</div>
+      <span class="lang-flag">🇬🇧</span>
+      <div class="lang-name">English</div>
+      <div class="lang-native">English</div>
+      <div class="lang-desc">Formal responses in clear, proper English</div>
+    </div>
+
+    <!-- Hinglish -->
+    <div class="lang-card" id="card-hi" onclick="selectLang('hi')">
+      <div class="selected-check">✓</div>
+      <span class="lang-flag">🇮🇳</span>
+      <div class="lang-name">Hinglish</div>
+      <div class="lang-native">हिंग्लिश</div>
+      <div class="lang-desc">Mix of Hindi + English — casual and friendly</div>
+    </div>
+  </div>
+
+  <button class="continue-btn" id="continue-btn" onclick="proceed()">
+    Continue &nbsp;→
+  </button>
+  <p class="lang-hint">आप बाद में भाषा बदल सकते हैं · You can change later</p>
+</div>
+
+<script>
+  let chosen = null;
+
+  function selectLang(lang) {
+    chosen = lang;
+    document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('card-' + lang).classList.add('selected');
+    const btn = document.getElementById('continue-btn');
+    btn.classList.add('active');
+    btn.textContent = lang === 'en' ? 'Continue in English →' : 'Hinglish mein continue karo →';
+  }
+
+  function proceed() {
+    if (!chosen) return;
+    localStorage.setItem('itm_lang', chosen);
+    document.body.classList.add('fade-out');
+    setTimeout(() => window.location.href = 'home.html', 500);
+  }
+</script>
+</body>
+</html>
